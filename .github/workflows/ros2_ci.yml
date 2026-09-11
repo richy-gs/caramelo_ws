@@ -18,9 +18,19 @@ jobs:
         with:
           required-ros-distributions: humble
 
-      - name: Build and Test Workspace
+      - name: Verify typesupport registration
+        run: |
+          source /opt/ros/humble/setup.sh
+          echo "AMENT_PREFIX_PATH=$AMENT_PREFIX_PATH"
+          ls /opt/ros/humble/share/ament_index/resource_index/rosidl_typesupport_c/ \
+            || echo "NO TYPESUPPORTS REGISTERED"
+
+      - name: Build and test workspace
         uses: ros-tooling/action-ros-ci@v0.3
         with:
+          package-name: |
+            agv_core
+            bumperbot_controller
+            caramelo_description
           target-ros2-distro: humble
-          # Optionally skip tests if needed:
-          # skip-tests: true
+          vcs-repo-file-url: ""
