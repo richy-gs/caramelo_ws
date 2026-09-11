@@ -1,0 +1,15 @@
+line-length = 99
+
+[lint]
+select = ["E", "W", "F", "Q", "I"]
+
+[lint.flake8-quotes]
+inline-quotes = "single"
+multiline-quotes = "single"
+docstring-quotes = "double"
+
+[lint.isort]
+known-first-party = ["caramelo_description", "bumperbot_controller", "agv_core"]
+
+[format]
+quote-style = "single"
