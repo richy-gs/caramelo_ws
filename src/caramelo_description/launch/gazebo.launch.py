@@ -90,7 +90,7 @@ def generate_launch_description():
         package='ros_gz_sim',
         executable='create',
         output='screen',
-        arguments=['-topic', 'robot_description', '-name', 'bumperbot'],
+        arguments=['-topic', 'robot_description', '-name', 'caramelo'],
     )
 
     gz_ros2_bridge = Node(
@@ -100,6 +100,8 @@ def generate_launch_description():
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
             '/imu@sensor_msgs/msg/Imu[gz.msgs.IMU',
             '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '/camera/image@sensor_msgs/msg/Image@gz.msgs.Image',
+            '/camera/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo',
         ],
         remappings=[
             ('/imu', '/imu/out'),

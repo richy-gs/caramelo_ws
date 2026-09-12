@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<robot name="bumperbot" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="caramelo" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!-- Start GZ or Ignition depending on ROS 2 Version -->
   <xacro:arg name="is_ignition" default="true"/>
@@ -13,6 +13,10 @@
 
   <!-- Include ros2_control Plugins -->
   <xacro:include filename="$(find caramelo_description)/urdf/bumperbot_ros2_control.xacro" />
+
+  <!-- ==================== -->
+  <!--       BASE LINK      -->
+  <!-- ==================== -->
 
   <link name="base_footprint"/>
   
@@ -45,6 +49,10 @@
     <origin xyz="0 0 0.033" rpy="0 0 0"/>
   </joint>
 
+  <!-- ==================== -->
+  <!--   WHEEL RIGHT LINK   -->
+  <!-- ==================== -->
+
   <link name="wheel_right_link">
     <inertial>
       <origin xyz="0 -0.014 0" rpy="0 0 0" />
@@ -75,6 +83,10 @@
     <axis xyz="0 1 0" />
   </joint>
   
+  <!-- ==================== -->
+  <!--   WHEEL LEFT LINK    -->
+  <!-- ==================== -->
+
   <link
     name="wheel_left_link">
     <inertial>
@@ -106,6 +118,10 @@
     <axis xyz="0 1 0" />
   </joint>
 
+  <!-- ==================== -->
+  <!--   CASTER FRONT LINK   -->
+  <!-- ==================== -->
+
   <link name="caster_front_link">
     <inertial>
       <origin xyz="3.89968128948481E-07 2.40073004698083E-07 0.00219173397061506" rpy="0 0 0" />
@@ -136,6 +152,10 @@
     <axis xyz="0 0 0" />
   </joint>
   
+  <!-- ==================== -->
+  <!--   CASTER REAR LINK   -->
+  <!-- ==================== -->
+
   <link name="caster_rear_link">
     <inertial>
       <origin xyz="3.8996812895542E-07 2.40073004698083E-07 0.00219173397061509" rpy="0 0 0" />
@@ -165,6 +185,10 @@
     <child link="caster_rear_link" />
     <axis xyz="0 0 0" />
   </joint>
+
+  <!-- ==================== -->
+  <!--   IMU LINK          -->
+  <!-- ==================== -->
 
   <link name="imu_link">
     <inertial>
@@ -196,6 +220,10 @@
     <axis xyz="0 0 0" />
   </joint>
 
+  <!-- ==================== -->
+  <!--   LASER LINK        -->
+  <!-- ==================== -->
+
   <link name="laser_link">
     <inertial>
       <origin xyz="-0.011945780406062 -0.000381929217680526 -0.0170649378129477" rpy="0 0 0" />
@@ -225,6 +253,50 @@
     <child link="laser_link" />
     <axis xyz="0 0 0" />
   </joint>
+
+  <!-- ==================== -->
+  <!--   CAMERA LINK       -->
+  <!-- ==================== -->
+
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <box size="0.03 0.06 0.03"/>
+      </geometry>
+      <material name="camera_dark">
+        <color rgba="0.05 0.05 0.05 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.03 0.06 0.03"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="0.00005" ixy="0" ixz="0"
+               iyy="0.00005" iyz="0" izz="0.00005"/>
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="camera_link" />
+    <origin xyz="0.08 0 0.04" rpy="0 0 0" />
+  </joint>
+
+  <link name="camera_link_optical"/>
+
+  <!-- Optical frame: ROS convention (x-right, y-down, z-forward) -->
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_link_optical"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+  </joint>
+
+  <!-- ==================== -->
+  <!--   MATERIALS         -->
+  <!-- ==================== -->
 
   <material name="blue">
     <color rgba="0 0 1 1"/>
