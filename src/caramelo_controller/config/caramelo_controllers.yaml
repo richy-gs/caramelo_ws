@@ -2,7 +2,7 @@ controller_manager:
   ros__parameters:
     update_rate: 100 # Hz
 
-    bumperbot_controller:
+    caramelo_controller:
       type: diff_drive_controller/DiffDriveController
 
     joint_state_broadcaster:
@@ -12,7 +12,7 @@ controller_manager:
       type: velocity_controllers/JointGroupVelocityController
 
 
-bumperbot_controller:
+caramelo_controller:
   ros__parameters:
     type        : diff_drive_controller/DiffDriveController
     use_stamped_vel: true

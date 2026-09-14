@@ -8,10 +8,10 @@ class TwistRelayNode(Node):
     def __init__(self):
         super().__init__('twist_relay')
         self.controller_sub = self.create_subscription(
-            Twist, '/bumperbot_controller/cmd_vel_unstamped', self.controller_twist_callback, 10
+            Twist, '/caramelo_controller/cmd_vel_unstamped', self.controller_twist_callback, 10
         )
         self.controller_pub = self.create_publisher(
-            TwistStamped, '/bumperbot_controller/cmd_vel', 10
+            TwistStamped, '/caramelo_controller/cmd_vel', 10
         )
         self.joy_sub = self.create_subscription(
             TwistStamped, '/input_joy/cmd_vel_stamped', self.joy_twist_callback, 10

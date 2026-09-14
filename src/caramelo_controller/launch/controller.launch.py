@@ -14,7 +14,7 @@ def noisy_controller(context, *args, **kwargs):
     wheel_separation_error = float(LaunchConfiguration('wheel_separation_error').perform(context))
 
     noisy_controller_py = Node(
-        package='bumperbot_controller',
+        package='caramelo_controller',
         executable='noisy_controller.py',
         parameters=[
             {
@@ -27,7 +27,7 @@ def noisy_controller(context, *args, **kwargs):
     )
 
     noisy_controller_cpp = Node(
-        package='bumperbot_controller',
+        package='caramelo_controller',
         executable='noisy_controller',
         parameters=[
             {
@@ -94,7 +94,7 @@ def generate_launch_description():
     wheel_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['bumperbot_controller', '--controller-manager', '/controller_manager'],
+        arguments=['caramelo_controller', '--controller-manager', '/controller_manager'],
         condition=UnlessCondition(use_simple_controller),
     )
 
@@ -111,7 +111,7 @@ def generate_launch_description():
                 ],
             ),
             Node(
-                package='bumperbot_controller',
+                package='caramelo_controller',
                 executable='simple_controller.py',
                 parameters=[
                     {
@@ -123,7 +123,7 @@ def generate_launch_description():
                 condition=IfCondition(use_python),
             ),
             Node(
-                package='bumperbot_controller',
+                package='caramelo_controller',
                 executable='simple_controller',
                 parameters=[
                     {

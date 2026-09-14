@@ -38,12 +38,12 @@ class SimpleController(Node):
             Float64MultiArray, 'simple_velocity_controller/commands', 10
         )
         self.vel_sub_ = self.create_subscription(
-            Twist, 'bumperbot_controller/cmd_vel_unstamped', self.velCallback, 10
+            Twist, 'caramelo_controller/cmd_vel_unstamped', self.velCallback, 10
         )
         self.joint_sub_ = self.create_subscription(
             JointState, 'joint_states', self.jointCallback, 10
         )
-        self.odom_pub_ = self.create_publisher(Odometry, 'bumperbot_controller/odom', 10)
+        self.odom_pub_ = self.create_publisher(Odometry, 'caramelo_controller/odom', 10)
 
         self.speed_conversion_ = np.array(
             [

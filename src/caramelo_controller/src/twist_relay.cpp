@@ -9,8 +9,8 @@ public:
         : Node("twist_relay")
     {
         controller_sub_ = this->create_subscription< geometry_msgs::msg::Twist >(
-            "/bumperbot_controller/cmd_vel_unstamped", 10, std::bind(&TwistRelayNode::controller_twist_callback, this, std::placeholders::_1));
-        controller_pub_ = this->create_publisher< geometry_msgs::msg::TwistStamped >("/bumperbot_controller/cmd_vel", 10);
+            "/caramelo_controller/cmd_vel_unstamped", 10, std::bind(&TwistRelayNode::controller_twist_callback, this, std::placeholders::_1));
+        controller_pub_ = this->create_publisher< geometry_msgs::msg::TwistStamped >("/caramelo_controller/cmd_vel", 10);
         joy_sub_        = this->create_subscription< geometry_msgs::msg::TwistStamped >(
             "/input_joy/cmd_vel_stamped", 10, std::bind(&TwistRelayNode::joy_twist_callback, this, std::placeholders::_1));
         joy_pub_ = this->create_publisher< geometry_msgs::msg::Twist >("/input_joy/cmd_vel", 10);

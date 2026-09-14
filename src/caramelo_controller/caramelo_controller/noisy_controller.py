@@ -36,7 +36,7 @@ class NoisyController(Node):
         self.joint_sub_ = self.create_subscription(
             JointState, 'joint_states', self.jointCallback, 10
         )
-        self.odom_pub_ = self.create_publisher(Odometry, 'bumperbot_controller/odom_noisy', 10)
+        self.odom_pub_ = self.create_publisher(Odometry, 'caramelo_controller/odom_noisy', 10)
 
         self.speed_conversion_ = np.array(
             [

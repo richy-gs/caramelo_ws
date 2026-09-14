@@ -9,7 +9,7 @@ multiline-quotes = "single"
 docstring-quotes = "double"
 
 [lint.isort]
-known-first-party = ["caramelo_description", "bumperbot_controller", "agv_core"]
+known-first-party = ["caramelo_description", "caramelo_controller", "agv_core"]
 
 [format]
 quote-style = "single"

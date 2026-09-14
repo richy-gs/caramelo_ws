@@ -36,7 +36,7 @@ jobs:
         with:
           package-name: |
             agv_core
-            bumperbot_controller
+            caramelo_controller
             caramelo_description
           target-ros2-distro: humble
           coverage-result: false
