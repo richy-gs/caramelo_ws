@@ -2,25 +2,41 @@ name: ROS 2 Humble CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
     branches: [main]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-22.04
+    container:
+      image: ros:humble-ros-base
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Setup ROS 2 Humble
-        uses: ros-tooling/setup-ros@v0.7
-        with:
-          required-ros-distributions: humble
-
-      - name: Build and Test Workspace
+      - name: Install colcon extensions
+        run: |
+          apt-get update
+          apt-get install -y python3-colcon-lcov-result python3-colcon-coveragepy-result python3-colcon-mixin lcov
+      
+      # - name: Setup ROS 2 Humble
+      #   uses: ros-tooling/setup-ros@v0.7
+      #   with:
+      #     required-ros-distributions: humble
+      # - name: Verify typesupport registration
+      #   run: |
+      #     source /opt/ros/humble/setup.sh
+      #     echo "AMENT_PREFIX_PATH=$AMENT_PREFIX_PATH"
+      #     ls /opt/ros/humble/share/ament_index/resource_index/rosidl_typesupport_c/ \
+      #       || echo "NO TYPESUPPORTS REGISTERED"
+      
+      - name: Build and test workspace
         uses: ros-tooling/action-ros-ci@v0.3
         with:
+          package-name: |
+            agv_core
+            caramelo_controller
+            caramelo_description
           target-ros2-distro: humble
-          # Optionally skip tests if needed:
-          # skip-tests: true
+          coverage-result: false
