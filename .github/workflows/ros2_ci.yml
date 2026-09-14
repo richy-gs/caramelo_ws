@@ -32,4 +32,4 @@ jobs:
             bumperbot_controller
             caramelo_description
           target-ros2-distro: humble
-          vcs-repo-file-url: ""
+          coverage-result: false
